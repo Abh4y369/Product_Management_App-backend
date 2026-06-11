@@ -33,7 +33,7 @@ exports.SignIn = async (req, res) => {
         console.log(isPasswordMatch)
         if (isPasswordMatch) {
             const token = jwt.sign({ _id: existingUser._id }, process.env.JWT_SECRET_KEY, { expiresIn: "2h" });   //jwt for token generation
-            res.status(200).json({ token: token, user: existingUser.name });
+            res.status(200).json({ token: token, _id: existingUser.id, name: existingUser.name, email: existingUser.email });
         }
         else {
             res.status(400).json("Invalid Email/Password");
