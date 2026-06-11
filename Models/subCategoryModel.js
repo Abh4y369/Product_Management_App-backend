@@ -21,7 +21,5 @@ const subCategorySchema =
     }
   );
 
-module.exports = mongoose.model(
-  "subcategories",
-  subCategorySchema
-);
+const subcategories = mongoose.model("subcategories",subCategorySchema);
+module.exports=subcategories

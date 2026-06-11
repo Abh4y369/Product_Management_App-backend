@@ -13,3 +13,5 @@ const jwtMiddle=async(req,res,next)=>{
         res.status(500).json({message:"JWT ERROR"+err});
     }
 }
+
+module.exports=jwtMiddle
