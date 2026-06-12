@@ -100,7 +100,7 @@ exports.productUpdate = async (req, res) => {
 exports.deleteProduct = async (req, res) => {
     try {
         const { pid } = req.params
-        const deleteProduct = await products.findByIdAndDelete(pid)
+        const deletedProduct = await products.findByIdAndDelete(pid)
         if (!deletedProduct) {
             return res.status(404).json("Product Not Found")
         }
@@ -133,6 +133,9 @@ exports.getWishlist = async (req, res) => {
     try {
         const uid = req.payload
         const userwishlist = await users.findById(uid).populate("wishlist")    //fetching wishlist using user id
+        if (!userwishlist) {
+            return res.status(404).json("User not found")
+        }
         res.status(200).json(userwishlist.wishlist)
 
     }

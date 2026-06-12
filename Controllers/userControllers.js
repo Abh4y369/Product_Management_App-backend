@@ -29,6 +29,9 @@ exports.SignIn = async (req, res) => {
     try {
         const { email, password } = req.body;
         const existingUser = await users.findOne({ email: email });
+        if (!existingUser) {
+            return res.status(400).json("Invalid Email/Password");
+        }
         const isPasswordMatch = await bcrypt.compare(password, existingUser.password);
         console.log(isPasswordMatch)
         if (isPasswordMatch) {
@@ -49,7 +52,7 @@ exports.SignIn = async (req, res) => {
 
 exports.getProfile = async (req, res) => {
     try {
-        const { uid } = req.payload
+        const uid = req.payload
         const user = await users.findById(uid)
         if (!user) {
             res.status(400).json("User not Found")
