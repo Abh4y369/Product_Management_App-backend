@@ -9,6 +9,7 @@ const subCategoryControllers=require('../Controllers/subCategoryController')
 const productControllers=require('../Controllers/productController')
 
 
+
 //user
 router.post('/user/signup',userControllers.SignUp)
 router.post('/user/signin',userControllers.SignIn)
@@ -17,13 +18,23 @@ router.get('/user/profile',jwtMiddle,userControllers.getProfile)
 //category
 router.post('/category/add',jwtMiddle,categoryControllers.addCategory)
 router.get('/category/all',jwtMiddle,categoryControllers.getAllCategories)
-router.delete('/category/delete/:id',jwtMiddle,categoryControllers.deleteCategory)
+
 
 //sub category
 router.post('/subcategory/add',jwtMiddle,subCategoryControllers.addSubcategory)
 router.get('/subcategory/all',jwtMiddle,subCategoryControllers.getAllSubCategories)
 
 //products
+router.post('/product/add',jwtMiddle,multerConfig.single('image'),productControllers.addProduct)
+router.get('/product/all',jwtMiddle,productControllers.getAllProducts)
+router.get('/product/:pid',jwtMiddle,productControllers.getProductById)
+router.put('/product/update/:pid',jwtMiddle,multerConfig.single('image'),productControllers.productUpdate)
+router.delete('/product/delete/:pid',jwtMiddle,productControllers.deleteProduct)
+
+//wishlists
+router.put('/wishlist/add/:pid',jwtMiddle,productControllers.addtoWishlist)
+router.get('/wishlist',jwtMiddle,productControllers.getWishlist)
+router.delete('/wishlist/delete/:pid',jwtMiddle,productControllers.deleteWishlist)
 
 
 

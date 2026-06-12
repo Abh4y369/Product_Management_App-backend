@@ -26,6 +26,7 @@ exports.addCategory=async(req,res)=>{
     }
 }
 
+//List Categories
 exports.getAllCategories=async(req,res)=>{
     try{
         const listCategories=await categories.find()
@@ -37,14 +38,5 @@ exports.getAllCategories=async(req,res)=>{
     }
 }
 
-exports.deleteCategory=async(req,res)=>{
-    try{
-        const{cid}=req.params         //cid means category id
-        const delCategory=await categories.findByIdAndDelete(cid)
-        res.status(200).json("Category deleted successfully !!")
-    }
-    catch(err){
-        console.log(err)
-        res.status(500).json(err.message)
-    }
-}
+
+
